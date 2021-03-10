@@ -6,6 +6,16 @@
           北京理工大学国防科技园2号楼10层北京理工大学国防科技园2号楼10层北京理工大学国防科技园2号楼10层北京理工大学国防科技园2号楼10层北京理工大学国防科技园2号楼10层
           <span class="iconfont postion_notice">&#xe60b;</span>
       </div>
+      <div class="search">
+        <span class="iconfont postion_icon">&#xe62d;</span>
+        <span class="search_text">搜索</span>
+      </div>
+      <div class="banner">
+        <img
+          class="banner__img"
+          src="http://www.dell-lee.com/imgs/vue3/banner.jpg"
+        />
+      </div>
     </div>
     <div class="docker">
       <span class="docker_item docker_item-active">
@@ -58,6 +68,30 @@
     font-size: .2rem;
   }
   color: $content-fontcolor;
+}
+.search {
+  margin-bottom: .12rem;
+  line-height: .32rem;
+  background: #F5F5F5;
+  color: #b7b7b7;
+  border-radius: .16rem;
+  .iconfont {
+    display: inline-block;
+    padding: 0 .08rem 0 .16rem;
+    font-size: 0.1rem;
+  }
+  &_text {
+    display: inline-block;
+    font-size: 0.14rem;
+  }
+}
+.banner {
+  height: 0;
+  overflow: hidden;
+  padding-bottom: 25.4%;
+  &__img {
+    width: 100%;
+  }
 }
 .docker {
   display: flex;
