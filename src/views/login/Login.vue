@@ -29,7 +29,8 @@ export default {
 }
 </script>
 
-<style scope lang="scss">
+<style scoped lang="scss">
+@import "../../style/variables.scss";
 .wrapper{
      position: absolute;
      top: 50%;
@@ -76,7 +77,7 @@ export default {
      &_login_link {
          text-align: center;
          font-size: 0.14rem;
-         color: #777;
+         color: $content-notice-fontcolor;
      }
 }
 </style>

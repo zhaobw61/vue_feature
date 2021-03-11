@@ -1,18 +1,12 @@
 <template>
   <div>
-    <Home v-if="false"></Home>
-    <Login></Login>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import Home from './views/home/Home.vue'
-import Login from './views/login/Login.vue'
+
 export default {
-  name: 'App',
-  components: {
-    Home,
-    Login
-  }
+  name: 'App'
 }
 </script>
