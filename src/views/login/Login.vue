@@ -14,10 +14,8 @@
 
 <script>
 import { useRouter } from 'vue-router'
-import axios from 'axios'
+import { post } from '../../utils/request'
 import { reactive } from 'vue'
-
-axios.defaults.headers.post['Content-Type'] = 'application/json'
 
 export default {
   name: 'Login',
@@ -28,16 +26,21 @@ export default {
     })
     console.log('data', data)
     const router = useRouter()
-    const handleLogin = () => {
-      axios.post('/api/user/login', {
-        userName: data.userName,
-        password: data.password
-      }).then(() => {
-        localStorage.isLogin = true
-        router.push({ name: 'Home' })
-      }).catch(() => {
+    const handleLogin = async () => {
+      try {
+        const result = await post('/api/user/login', {
+          userName: data.userName,
+          password: data.password
+        })
+        if (result.errno === 0) {
+          localStorage.isLogin = true
+          router.push({ name: 'Home' })
+        } else {
+          console.log('fail')
+        }
+      } catch {
         console.log('fail')
-      })
+      }
     }
     const handleRegisterClick = () => {
       router.push({ name: 'Register' })
