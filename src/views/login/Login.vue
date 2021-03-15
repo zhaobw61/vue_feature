@@ -2,7 +2,7 @@
   <div class="wrapper">
       <img class="wrapper_img" src="http://www.dell-lee.com/imgs/vue3/user.png">
       <div class="wrapper_input">
-          <input type="text" class="wrapper_input_content" placeholder="请输入手机号" v-model="userName">
+          <input type="text" class="wrapper_input_content" placeholder="请输入用户名" v-model="userName">
       </div>
       <div class="wrapper_input">
           <input type="password" class="wrapper_input_content" placeholder="请输入密码" v-model="password">
