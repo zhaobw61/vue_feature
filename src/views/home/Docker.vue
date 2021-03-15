@@ -34,7 +34,7 @@ export default {
   bottom: 0;
   width: 100%;
   height: 0.49rem;
-  border-top: 0.01rem solid $content-bgcolor;
+  border-top: 0.01rem solid $content-bgColor;
   &_item {
     text-align: center;
     flex: 1;

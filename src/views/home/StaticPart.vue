@@ -135,6 +135,6 @@ export default {
 .gap {
   margin: 0 -0.18rem;
   height: 0.1rem;
-  background: $content-bgcolor;
+  background: $content-bgColor;
 }
 </style>

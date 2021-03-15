@@ -1,21 +1,7 @@
 <template>
     <div class="nearby">
         <h3 class="nearby_title">附近店铺</h3>
-        <div v-for="(item, index) in nearbyList" :key="index" class="nearby_item">
-            <img
-            :src="item.imgUrl"
-            class="nearby_item_img"
-            />
-            <div class="nearby_content">
-            <div class="nearby_content_title">{{item.name}}</div>
-            <div class="nearby_content_tags">
-                <span class="nearby_content_tag">月售：{{item.sales}}</span>
-                <span class="nearby_content_tag">起送：{{item.expressLimit}}</span>
-                <span class="nearby_content_tag">基础运费：{{item.expressPrice}}</span>
-            </div>
-            <p class="nearby_content_highlight">{{item.slogan}}</p>
-            </div>
-        </div>
+        <shop-info v-for="item in nearbyList" :key="item._id" :item="item"></shop-info>
     </div>
 </template>
 
@@ -23,6 +9,7 @@
 // import { useRouter } from 'vue-router'
 import { ref } from 'vue'
 import { get } from '../../utils/request'
+import ShopInfo from '../../components/ShopInfo.vue'
 
 const useNearbyListEffect = () => {
   const nearbyList = ref([])
@@ -38,6 +25,9 @@ const useNearbyListEffect = () => {
 
 export default {
   name: 'nearby',
+  components: {
+    ShopInfo
+  },
   setup () {
     const { nearbyList, getNearbyList } = useNearbyListEffect()
     getNearbyList()
@@ -68,7 +58,7 @@ export default {
   &_content {
     flex: 1;
     padding-bottom: 0.12rem;
-    border-bottom: 1px solid $content-bgcolor;
+    border-bottom: 1px solid $content-bgColor;
     &_title {
       line-height: 0.22rem;
       font-size: 0.16rem;
