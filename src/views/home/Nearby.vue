@@ -3,37 +3,44 @@
         <h3 class="nearby_title">附近店铺</h3>
         <div v-for="(item, index) in nearbyList" :key="index" class="nearby_item">
             <img
-            :src="item.src"
+            :src="item.imgUrl"
             class="nearby_item_img"
             />
             <div class="nearby_content">
-            <div class="nearby_content_title">{{item.title}}</div>
+            <div class="nearby_content_title">{{item.name}}</div>
             <div class="nearby_content_tags">
-                <span v-for="(innerItem, innerIndex) in item.tags" :key="innerIndex" class="nearby_content_tag">{{innerItem}}</span>
+                <span class="nearby_content_tag">月售：{{item.sales}}</span>
+                <span class="nearby_content_tag">起送：{{item.expressLimit}}</span>
+                <span class="nearby_content_tag">基础运费：{{item.expressPrice}}</span>
             </div>
-            <p class="nearby_content_highlight">{{item.desc}}</p>
+            <p class="nearby_content_highlight">{{item.slogan}}</p>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+// import { useRouter } from 'vue-router'
+import { ref } from 'vue'
+import { get } from '../../utils/request'
+
+const useNearbyListEffect = () => {
+  const nearbyList = ref([])
+  const getNearbyList = async () => {
+    const result = await get('/api/shop/hot-list')
+    if (result.errno === 0 && result.data.length) {
+      nearbyList.value = result.data
+    }
+    console.log(result.data)
+  }
+  return { nearbyList, getNearbyList }
+}
+
 export default {
   name: 'nearby',
   setup () {
-    const nearbyList = [
-      {
-        src: 'http://www.dell-lee.com/imgs/vue3/near.png',
-        title: '沃尔玛',
-        tags: ['月售一万+', '起送￥0', '基础运费￥5'],
-        desc: '自尊VIP高亮-自尊VIP高亮-自尊VIP高亮-自尊VIP高亮'
-      }, {
-        src: 'http://www.dell-lee.com/imgs/vue3/near.png',
-        title: '沃尔玛',
-        tags: ['月售一万+', '起送￥0', '基础运费￥5'],
-        desc: '自尊VIP高亮-自尊VIP高亮-自尊VIP高亮-自尊VIP高亮'
-      }
-    ]
+    const { nearbyList, getNearbyList } = useNearbyListEffect()
+    getNearbyList()
     return { nearbyList }
   }
 }
