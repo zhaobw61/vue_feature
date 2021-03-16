@@ -1,7 +1,9 @@
 <template>
     <div class="nearby">
         <h3 class="nearby_title">附近店铺</h3>
-        <shop-info v-for="item in nearbyList" :key="item._id" :item="item"></shop-info>
+        <router-link to="shop" v-for="item in nearbyList" :key="item._id" >
+          <shop-info :item="item"></shop-info>
+        </router-link>
     </div>
 </template>
 
@@ -45,6 +47,9 @@ export default {
     font-size: 0.18rem;
     font-weight: normal;
     color: $content-fontcolor;
+  }
+  a {
+    text-decoration: none;
   }
   &_item {
     display: flex;
