@@ -13,7 +13,7 @@
       </div>
     </div>
       <ShopInfo
-      v-for="item in nearbyList"
+      v-for="item in data"
       :key = "item._id"
       :item ="item"
       :hideBorder="true"
@@ -22,7 +22,9 @@
 </template>
 
 <script>
+import { reactive } from 'vue'
 import { useRouter } from 'vue-router'
+import { get } from '../../utils/request'
 import ShopInfo from '../../components/ShopInfo'
 export default {
   name: 'Shop',
@@ -31,19 +33,20 @@ export default {
   },
   setup () {
     const router = useRouter()
-    const nearbyList = [{
-      expressLimit: 0,
-      expressPrice: 5,
-      imgUrl: 'http://www.dell-lee.com/imgs/vue3/near.png',
-      name: '沃尔玛',
-      sales: 10000,
-      slogan: 'VIP尊享满89元减4元运费券',
-      _id: '1'
-    }]
+    const data = reactive({
+      item: {}
+    })
+    const getItemData = async () => {
+      const result = await get('/api/shop/1')
+      if (result.errno === 0 && result.data) {
+        data.item = result.data
+      }
+    }
+    getItemData()
     const handleBackClick = () => {
       router.back()
     }
-    return { nearbyList, handleBackClick }
+    return { data, handleBackClick }
   }
 }
 </script>
