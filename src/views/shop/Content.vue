@@ -13,7 +13,7 @@
     <div class="product">
       <div
         class="product__item"
-        v-for="item in list"
+        v-for="item in contentlist"
         :key="item._id"
       >
         <img class="product__item__img" :src="item.imgUrl" />
@@ -30,7 +30,7 @@
             class="product__number__minus iconfont"
             @click="() => { changeCartItem(shopId, item._id, item, -1, shopName) }"
           >&#xe691;</span>
-            {{getProductCartCount(shopId, item._id)}}
+            <!-- {{getProductCartCount(shopId, item._id)}} -->
           <span
             class="product__number__plus iconfont"
             @click="() => { changeCartItem(shopId, item._id, item, 1, shopName) }"
@@ -42,8 +42,39 @@
 </template>
 
 <script>
+import { reactive, toRefs } from 'vue'
+import { get } from '../../utils/request'
 export default {
-  name: 'Content'
+  name: 'Content',
+  setup () {
+    const categories = [{
+      name: '全部商品',
+      tab: 'all'
+    }, {
+      name: '秒杀',
+      tab: 'seckill'
+    }, {
+      name: '新鲜水果',
+      tab: 'fruit'
+    }]
+    const data = reactive({
+      currentTab: categories[0].tab,
+      contentlist: []
+    })
+    const getContentData = async (tab) => {
+      const result = await get('/api/shop/1/products', { tab })
+      if (result.errno === 0 && result.data.length) {
+        data.contentlist = result.data
+      }
+    }
+    const handleTabClick = (tab) => {
+      getContentData(tab)
+      data.currentTab = tab
+    }
+    getContentData('all')
+    const { contentlist, currentTab } = toRefs(data)
+    return { contentlist, currentTab, categories, handleTabClick }
+  }
 }
 </script>
 
