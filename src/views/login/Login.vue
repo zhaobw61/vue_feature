@@ -15,7 +15,7 @@
 
 <script>
 import { reactive, toRefs } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import { post } from '../../utils/request'
 import Toast, { useToastEffect } from '../../components/Toast.vue'
 
@@ -65,6 +65,10 @@ export default {
     const { show, toastMessage, showToast } = useToastEffect()
     const { username, password, handleLogin } = useLoginEffect(showToast)
     const { handleRegisterClick } = useRegisterEffect()
+    const router = useRouter()
+    const route = useRoute()
+    console.log('router', router)
+    console.log('route', route)
     return { handleLogin, handleRegisterClick, username, password, show, toastMessage }
   }
 }
