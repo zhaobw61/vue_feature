@@ -13,7 +13,7 @@
     <div class="product">
       <div
         class="product__item"
-        v-for="item in contentlist"
+        v-for="item in list"
         :key="item._id"
       >
         <img class="product__item__img" :src="item.imgUrl" />
