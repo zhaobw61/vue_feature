@@ -20,7 +20,7 @@
       ></ShopInfo>
       <Content
       ></Content>
-      <Cart></Cart>
+      <!-- <Cart></Cart> -->
   </div>
 </template>
 
@@ -30,7 +30,7 @@ import { useRouter, useRoute } from 'vue-router'
 import { get } from '../../utils/request'
 import ShopInfo from '../../components/ShopInfo'
 import Content from './Content.vue'
-import Cart from './Cart'
+// import Cart from './Cart'
 
 const useShopInfoEffect = () => {
   const route = useRoute()
@@ -55,8 +55,8 @@ export default {
   name: 'Shop',
   components: {
     ShopInfo,
-    Content,
-    Cart
+    Content
+    // Cart
   },
   setup () {
     const { item, getItemData } = useShopInfoEffect()
